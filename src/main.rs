@@ -72,13 +72,15 @@ impl Command {
     }
 }
 
+const DEV_PATH: &str = "/tmp/sled-dev"; // TODO: replace this with a real path
+
 fn put(args: &PutArgs) -> Result<()> {
-    let storage = SledStorage::new()?;
+    let storage = SledStorage::new(DEV_PATH)?;
     storage.put(&args.key, &args.value)
 }
 
 fn get(args: &GetArgs) -> Result<()> {
-    let storage = SledStorage::new()?;
+    let storage = SledStorage::new(DEV_PATH)?;
     let result = storage.get(&args.key)?;
     let output = match result {
         Some(value) => format!("{value}"),
@@ -90,7 +92,7 @@ fn get(args: &GetArgs) -> Result<()> {
 }
 
 fn list() -> Result<()> {
-    let storage = SledStorage::new()?;
+    let storage = SledStorage::new(DEV_PATH)?;
     for key in storage.list()? {
         println!("{key}");
     }
@@ -99,7 +101,7 @@ fn list() -> Result<()> {
 
 fn delete(args: &DeleteArgs) -> Result<()> {
     if args.delete_flags.force {
-        let storage = SledStorage::new()?;
+        let storage = SledStorage::new(DEV_PATH)?;
         storage.delete(&args.key)?;
     } else {
         println!("would delete secret with name {}", args.key);
@@ -119,8 +121,8 @@ pub struct SledStorage {
 }
 
 impl SledStorage {
-    fn new() -> Result<SledStorage> {
-        let db = sled::open("/tmp/sled-dev")?;
+    fn new(path: &str) -> Result<SledStorage> {
+        let db = sled::open(path)?;
         Ok(SledStorage { db })
     }
 }
@@ -155,6 +157,46 @@ impl Storage for SledStorage {
 
     fn delete(&self, key: &str) -> Result<()> {
         self.db.remove(key.as_bytes())?;
+        self.db.flush()?;
+        Ok(())
+    }
+}
+
+// TODO: move these tests to their own test file when we move Storage and SledStorage to their own files
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_put_stores_value() -> Result<()> {
+        let sled = SledStorage::new("/tmp/sled-test")?;
+        let result = sled.put("key", "val");
+        assert!(result.is_ok(), "put did not succeed, returned: {:?}", result);
+        Ok(())
+    }
+
+    #[test]
+    fn test_get_returns_correct_value() -> Result<()> {
+        // TODO: use tempfiles so we don't need to append "-2" to the dev directory
+        let sled = SledStorage::new("/tmp/sled-test-2")?;
+        sled.put("key", "val")?;
+
+        let result = sled.get("key");
+        assert!(result.is_ok(), "get did not succeed, returned: {:?}", result);
+
+        let value = result?;
+        assert_eq!(value, Some("val".to_string()));
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_update_overwrites_value() -> Result<()> {
+        Ok(())
+    }
+
+    #[test]
+    fn test_remove_deletes_key() -> Result<()> {
         Ok(())
     }
 }
