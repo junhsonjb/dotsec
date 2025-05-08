@@ -12,6 +12,7 @@ anyhow = "1.0.98"
 clap = { version = "4.5.36", features = ["derive"] }
 serial_test = "3.2.0"
 sled = "0.34.7"
+tempfile = "3.19.1"
 
 [dev-dependencies]
 assert_cmd = "2.0.16"

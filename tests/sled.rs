@@ -1,6 +1,6 @@
 use anyhow::Result;
-use assert_cmd::Command;
-use predicates::prelude::*;
+// use assert_cmd::Command;
+// use predicates::prelude::*;
 
 // TODO: put sled tests here:
 // just to get the logic done quickly, I don't feel like organizing stuff into a great file
