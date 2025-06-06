@@ -1,4 +1,3 @@
-// use anyhow::{Context, Result};
 use clap::{CommandFactory, Parser};
 use dotsec::cli::Cli;
 

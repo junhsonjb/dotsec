@@ -1,9 +1,7 @@
 use anyhow::Result;
 use assert_cmd::Command;
 use predicates::prelude::*;
-use serial_test::serial;  // TODO: allow tests to run in parallel
-// use pretty_assertions::assert_eq;
-// use std::fs;
+use serial_test::serial; // TODO: allow tests to run in parallel
 
 // TODO: this currently uses an empty string to test only for success, I don't love that
 fn run(args: &[&str], substring: &str) -> Result<()> {
@@ -53,7 +51,9 @@ fn put_fail_no_args() -> Result<()> {
         .arg("put")
         .assert()
         .failure()
-        .stderr(predicate::str::contains("the following required arguments were not provided:"));
+        .stderr(predicate::str::contains(
+            "the following required arguments were not provided:",
+        ));
     Ok(())
 }
 
@@ -64,6 +64,8 @@ fn put_fail_single_arg() -> Result<()> {
         .args(["put", "key"])
         .assert()
         .failure()
-        .stderr(predicate::str::contains("the following required arguments were not provided:"));
+        .stderr(predicate::str::contains(
+            "the following required arguments were not provided:",
+        ));
     Ok(())
 }

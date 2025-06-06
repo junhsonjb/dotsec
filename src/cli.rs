@@ -1,6 +1,6 @@
+use crate::storage::{SledStorage, Storage};
 use anyhow::Result;
 use clap::{Args, Parser, Subcommand};
-use crate::storage::{SledStorage, Storage};
 
 #[derive(Debug, Parser)]
 #[command(author, version, about)]

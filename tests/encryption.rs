@@ -1,14 +1,6 @@
 use anyhow::Result;
 use dotsec::encryption::{ChaCha20Poly1305Encryption, Encryption};
 
-// Tests we need:
-// - X == X after encryption ✅
-// - X != Y after encryption ✅
-// - same input encrypted twice are not equal to each other ✅
-// - decryption fails with wrong ciphertext ✅
-// - decrypting garbage fails ✅
-// - encrypting empty string -> empty string
-
 #[test]
 fn test_round_trip() -> Result<()> {
     let encryptor = ChaCha20Poly1305Encryption::new()?;
