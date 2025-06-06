@@ -3,6 +3,9 @@ use chacha20poly1305::{
     aead::{Aead, AeadCore, KeyInit, OsRng},
     ChaCha20Poly1305, Key, Nonce,
 };
+use std::fs::{read, File};
+use std::io::prelude::*;
+use xdg::BaseDirectories;
 
 pub trait Encryption {
     fn encrypt(&self, plaintext: &[u8]) -> Result<Vec<u8>>;
@@ -14,13 +17,24 @@ pub struct ChaCha20Poly1305Encryption {
 }
 
 impl ChaCha20Poly1305Encryption {
+    /// Loads a ChaCha20 key from disk or generates and stores a new one if it doesn't exist.
+    fn load_or_generate_key() -> Result<Key> {
+        let xdg = BaseDirectories::with_prefix("dotsec");
+        let key_file_path = xdg.place_config_file("private/dotsec.key")?;
+
+        if key_file_path.exists() {
+            let bytes = read(key_file_path)?;
+            Ok(Key::clone_from_slice(&bytes))
+        } else {
+            let new_key = ChaCha20Poly1305::generate_key(&mut OsRng);
+            let mut file = File::create(&key_file_path)?;
+            file.write_all(&new_key)?;
+            Ok(new_key)
+        }
+    }
+
     pub fn new() -> Result<ChaCha20Poly1305Encryption> {
-        // DEV: This is only for development, we MUST change this so that we generate/use a real key
-        // TODO: change this code to:
-        // - read key from decided location, L (TBD)
-        // - if no key present, generate new one and store at L
-        let raw_key = [0u8; 32];
-        let key = Key::from_slice(&raw_key);
+        let key = Self::load_or_generate_key()?;
         let cipher = ChaCha20Poly1305::new(&key);
         Ok(ChaCha20Poly1305Encryption { cipher })
     }
@@ -53,4 +67,3 @@ impl Encryption for ChaCha20Poly1305Encryption {
         Ok(plaintext)
     }
 }
-

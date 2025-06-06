@@ -15,6 +15,7 @@ rand_core = "0.9.3"
 serial_test = "3.2.0"
 sled = "0.34.7"
 tempfile = "3.19.1"
+xdg = "3.0.0"
 
 [dev-dependencies]
 assert_cmd = "2.0.16"
