@@ -53,4 +53,3 @@ impl Storage for SledStorage {
         Ok(())
     }
 }
-
