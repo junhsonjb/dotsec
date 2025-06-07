@@ -56,12 +56,12 @@ cargo install --path .
 `dotsec` has four primary functions:
 - store secrets, along with an identifier (a "key")
 ```bash
-cargo run -- put molly x12YtT4gL12y41$@a2bxy941GGLB12TOW$$@%17
+cargo run -- put molly weasley-family-password@#$%
 ```
 - retrieve secrets, using the associated key
 ```bash
 cargo run -- get molly
-# stdout: `x12YtT4gL12y41$@a2bxy941GGLB12TOW$$@%17`
+# stdout: `weasley-family-password@#$%`
 ```
 - list all existing keys
 ```bash
