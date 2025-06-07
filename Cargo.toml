@@ -2,6 +2,17 @@
 name = "dotsec"
 version = "0.1.0"
 edition = "2024"
+repository = "https://github.com/junhsonjb/dotsec"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+description = "a lightweight CLI tool for locally managing secrets"
+categories = ["command-line-utilities"]
+keywords = [
+    "dotfiles",
+    "security",
+    "secrets",
+    "tool",
+]
 
 [[bin]]
 name = "ds"
