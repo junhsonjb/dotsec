@@ -26,17 +26,17 @@ cargo build --release
 cargo run -- -V
 ```
 
-### (Optional) Aliasing
+### (Optional) Local Cargo Install
 Since `dotsec` currently has to be built from source, users will need to run the program in the following manner:
 ```bash
 cargo run -- <command> <args>
 ```
 
-This is a lot to type. The project is planned to be published in the short-term, but in the meantime we can use an alias as a workaround:
+This is a lot to type. The project is planned to be published in the short-term, but in the meantime we can use cargo to setup the binary:
 ```bash
-alias ds="cargo run --"  # `ds` is the name of the binary
+# in the project root (`dotsec/`)
+cargo install --path . 
 ```
-Run the above line, or add it to your `bashrc` (or the config for whichever shell you use) to make it persistent.
 
 ## 🔐 Security
 `dotsec` uses [ChaCha20-Poly1305](https://github.com/RustCrypto/AEADs/tree/master/chacha20poly1305) to encrypt and decrypt secrets. Keys and values are stored locally on the user's machine using [sled](https://github.com/spacejam/sled).
