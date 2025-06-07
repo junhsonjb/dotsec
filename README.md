@@ -34,7 +34,7 @@ cargo run -- <command> <args>
 
 This is a lot to type. The project is planned to be published in the short-term, but in the meantime we can use an alias as a workaround:
 ```bash
-alias dotsec="cargo run --"
+alias ds="cargo run --"  # `ds` is the name of the binary
 ```
 Run the above line, or add it to your `bashrc` (or the config for whichever shell you use) to make it persistent.
 
