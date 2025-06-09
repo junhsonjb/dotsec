@@ -2,6 +2,7 @@
 name = "dotsec"
 version = "0.1.0"
 edition = "2024"
+author = "Junhson Jean-Baptiste <jjeanba2@binghamton.edu>"
 repository = "https://github.com/junhsonjb/dotsec"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
