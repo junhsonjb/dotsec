@@ -13,7 +13,7 @@ It's designed for terminal users who want a simple CLI-based secrets manager tha
 
 ## 💾 Installation
 
-Currently `dotsec` must be cloned and built from source. One of the short-term goals is to publish the project so that it can be installed on platforms like `brew`, `apt`, and others.
+Currently `dotsec` can be built from source or installed via `crates.io`. One of the short-term goals is to publish the project so that it can be installed on platforms like `brew`, `apt`, and others.
 
 ### Prerequisites
 You'll need [Rust](https://www.rust-lang.org/tools/install) installed.
@@ -23,19 +23,13 @@ You'll need [Rust](https://www.rust-lang.org/tools/install) installed.
 git clone https://github.com/junhsonjb/dotsec.git
 cd dotsec
 cargo build --release
-cargo run -- -V
+cargo run -- -V         # optional: verify that installation was successful
+cargo install --path .  # optional: install binary under command `ds`
 ```
 
-### (Optional) Local Cargo Install
-Since `dotsec` currently has to be built from source, users will need to run the program in the following manner:
+### Install from crates.io
 ```bash
-cargo run -- <command> <args>
-```
-
-This is a lot to type. The project is planned to be published in the short-term, but in the meantime we can use cargo to setup the binary:
-```bash
-# in the project root (`dotsec/`)
-cargo install --path . 
+cargo install dotsec
 ```
 
 ## 🔐 Security
