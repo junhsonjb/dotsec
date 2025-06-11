@@ -13,12 +13,12 @@ It's designed for terminal users who want a simple CLI-based secrets manager tha
 
 ## 💾 Installation
 
-Currently `dotsec` can be installed using the following options:
+You can install `dotsec` using one of the following methods:
 - [build from source](#build-from-source)
-- [install from `crates.io`](#install-from-cratesio)
-- [install with homebrew](#install-with-homebrew)
+- [install via `crates.io`](#install-via-cratesio)
+- [install via homebrew](#install-via-homebrew)
 
-🥅 Short-term goals include publishing the project on more package managers!
+🥅 Short-term goal: Publish on more package managers!
 
 ### Build from source
 
@@ -29,20 +29,23 @@ You'll need [Rust](https://www.rust-lang.org/tools/install) installed.
 git clone https://github.com/junhsonjb/dotsec.git
 cd dotsec
 cargo build --release
-cargo run -- -V         # optional: verify that installation was successful
-cargo install --path .  # optional: install binary under command `ds`
+cargo run -- -V         # optional: check that it works
+cargo install --path .  # optional: make `ds` globally available
 ```
 
-### Install from crates.io
+### Install via crates.io
 ```sh
 cargo install dotsec
 ```
 
-### Install with homebrew
+### Install via homebrew
 ```sh
 brew tap junhsonjb/dotsec
 brew install dotsec
 ```
+
+## 🧠 Heads up
+The CLI is in early development (`v0.1.x`) — expect rapid iteration and the occasional breaking change. Feedback welcome!
 
 ## 🔐 Security
 `dotsec` uses [ChaCha20-Poly1305](https://github.com/RustCrypto/AEADs/tree/master/chacha20poly1305) to encrypt and decrypt secrets. Keys and values are stored locally on the user's machine using [sled](https://github.com/spacejam/sled).
