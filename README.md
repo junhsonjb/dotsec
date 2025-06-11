@@ -13,13 +13,19 @@ It's designed for terminal users who want a simple CLI-based secrets manager tha
 
 ## 💾 Installation
 
-Currently `dotsec` can be built from source or installed via `crates.io`. One of the short-term goals is to publish the project so that it can be installed on platforms like `brew`, `apt`, and others.
+Currently `dotsec` can be installed using the following options:
+- [build from source](#build-from-source)
+- [install from `crates.io`](#install-from-cratesio)
+- [install with homebrew](#install-with-homebrew)
 
-### Prerequisites
+🥅 Short-term goals include publishing the project on more package managers!
+
+### Build from source
+
+#### 📋 Prerequisites
 You'll need [Rust](https://www.rust-lang.org/tools/install) installed.
 
-### Install from source
-```bash
+```sh
 git clone https://github.com/junhsonjb/dotsec.git
 cd dotsec
 cargo build --release
@@ -28,8 +34,14 @@ cargo install --path .  # optional: install binary under command `ds`
 ```
 
 ### Install from crates.io
-```bash
+```sh
 cargo install dotsec
+```
+
+### Install with homebrew
+```sh
+brew tap junhsonjb/dotsec
+brew install dotsec
 ```
 
 ## 🔐 Security
@@ -40,7 +52,7 @@ cargo install dotsec
 > ⚠️ **Important: Encryption key is stored in plaintext!**
 >
 > The encryption key is saved to the following location:
-> ```bash
+> ```sh
 > $XDG_CONFIG_HOME/dotsec/private/dotsec.key  # typically resolves to ~/.config/dotsec/private/dotsec.key
 > ```
 > This file is **not encrypted**, and it can decrypt all your stored secrets. If someone gets access to it, they can read your data. Be careful not to check it into version control or share it.
@@ -49,21 +61,21 @@ cargo install dotsec
 
 `dotsec` has four primary functions:
 - store secrets, along with an identifier (a "key")
-```bash
+```sh
 cargo run -- put molly weasley-family-password@#$%
 ```
 - retrieve secrets, using the associated key
-```bash
+```sh
 cargo run -- get molly
 # stdout: `weasley-family-password@#$%`
 ```
 - list all existing keys
-```bash
+```sh
 cargo run -- list
 # stdout: `molly`
 ```
 - delete secrets, using the associated key
-```bash
+```sh
 cargo run -- delete molly -n # dry-run mode
 # stdout: `would delete secret with name molly`
 
