@@ -1,10 +1,9 @@
 #!/bin/sh
 set -e
 
-VERSION="v0.1.0"
 BINARY_NAME="ds"
 TARBALL_NAME="ds-x86_64-unknown-linux-gnu.tar.gz"
-GITHUB_URL="https://github.com/junhsonjb/dotsec/releases/download/$VERSION/$TARBALL_NAME"
+GITHUB_URL="https://github.com/junhsonjb/dotsec/releases/latest/download/$TARBALL_NAME"
 
 curl -sSL "$GITHUB_URL" -o "$TARBALL_NAME"
 
