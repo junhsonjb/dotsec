@@ -1,2 +1,3 @@
 /target
-/distribution
+/distribution/*
+!/distribution/install.sh
