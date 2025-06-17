@@ -17,6 +17,7 @@ You can install `dotsec` using one of the following methods:
 - [build from source](#build-from-source)
 - [install via `crates.io`](#install-via-cratesio)
 - [install via homebrew](#install-via-homebrew)
+- [install via script (Linux Only)](#install-via-script)
 
 🥅 Short-term goal: Publish on more package managers!
 
@@ -44,13 +45,24 @@ brew tap junhsonjb/dotsec
 brew install dotsec
 ```
 
+### Install via script
+Use `curl` to download the installation script and execute it with `sh`:
+```sh
+curl -sSL https://raw.githubusercontent.com/junhsonjb/dotsec/main/distribution/install.sh | sh
+```
+> This script downloads the latest binary and installs it to /usr/local/bin/ds
+
+It's always recommended to inspect scripts that you download off the internet before running them. You can do so by running the following:
+```sh
+curl -sSL https://raw.githubusercontent.com/junhsonjb/dotsec/main/distribution/install.sh | less
+```
+> Alternatively, [download the script directly](./distribution/install.sh)
+
 ## 🧠 Heads up
 The CLI is in early development (`v0.1.x`) — expect rapid iteration and the occasional breaking change. Feedback welcome!
 
 ## 🔐 Security
 `dotsec` uses [ChaCha20-Poly1305](https://github.com/RustCrypto/AEADs/tree/master/chacha20poly1305) to encrypt and decrypt secrets. Keys and values are stored locally on the user's machine using [sled](https://github.com/spacejam/sled).
-
-⚠️ Encryption keys are stored at `$XDG_CONFIG_HOME/dotsec/private/dotsec.key` (`$XDG_CONFIG_HOME` resolves to `$HOME/.config` unless otherwise defined). **This file is not encrypted. Please do not publicize this file (on github or elsewhere)!** `dotsec`'s primary goal is to provide a safe place to store your CLI secrets. It is the user's responsibility to safely manage their encryption key.
 
 > ⚠️ **Important: Encryption key is stored in plaintext!**
 >
