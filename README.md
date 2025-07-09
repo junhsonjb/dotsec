@@ -77,24 +77,24 @@ The CLI is in early development (`v0.1.x`) — expect rapid iteration and the oc
 `dotsec` has four primary functions:
 - store secrets, along with an identifier (a "key")
 ```sh
-cargo run -- put molly weasley-family-password@#$%
+ds put molly super-secret-weasley-info
 ```
 - retrieve secrets, using the associated key
 ```sh
-cargo run -- get molly
-# stdout: `weasley-family-password@#$%`
+ds get molly
+# stdout: `super-secret-weasley-info`
 ```
 - list all existing keys
 ```sh
-cargo run -- list
+ds list
 # stdout: `molly`
 ```
 - delete secrets, using the associated key
 ```sh
-cargo run -- delete molly -n # dry-run mode
+ds delete molly -n # dry-run mode
 # stdout: `would delete secret with name molly`
 
-cargo run -- delete molly -f # forces deletion
+ds delete molly -f # forces deletion
 ```
 because deletion is permanent, users are forced to run the command in either `dry-run` mode or `force` mode. Calling `delete` without either flag is an error.
 
